@@ -1,0 +1,17 @@
+{
+  "name": "english-live-quiz",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Interactive English-learning quiz overlay for TikTok LIVE / OBS",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "autoreset": "node scripts/auto-reset.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "tiktok-live-connector": "^2.5.0",
+    "ws": "^8.18.0"
+  }
+}

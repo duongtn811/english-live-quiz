@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>English Live — Studio</title>
+    <link rel="stylesheet" href="studio.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="brand">
+        <div class="logo">E</div>
+        <div>
+          <h1>English Live Quiz</h1>
+          <p>Livestream learning studio</p>
+        </div>
+      </div>
+      <div class="top-status">
+        <span class="pill" id="sourcePill"><i></i><span id="sourceText">Chưa kết nối</span></span>
+        <span class="pill" id="phasePill"><i></i><span id="phaseText">Chờ bắt đầu</span></span>
+        <a class="ghost-btn" href="/overlay/" target="_blank" rel="noopener">Mở overlay</a>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="col controls">
+        <section class="card">
+          <div class="card-head">
+            <h2>Nguồn sự kiện</h2>
+            <span class="hint">bình luận &amp; quà tặng</span>
+          </div>
+          <div class="segmented" id="sourceTabs">
+            <button data-source="demo" class="active" type="button">Chế độ demo</button>
+            <button data-source="tiktok" type="button">TikTok LIVE</button>
+          </div>
+          <div id="tiktokFields" class="stack hidden">
+            <label class="field">
+              <span>Tên TikTok</span>
+              <input id="channelInput" placeholder="@yourname" autocomplete="off" spellcheck="false" />
+            </label>
+          </div>
+          <div class="row-btns">
+            <button class="btn primary" id="connectBtn" type="button">Kết nối demo</button>
+            <button class="btn" id="disconnectBtn" type="button">Ngắt</button>
+          </div>
+          <p class="note" id="sourceNote">
+            Người xem ảo sẽ tự bình luận và tặng quà để bạn thử overlay ngay.
+          </p>
+        </section>
+
+        <section class="card">
+          <div class="card-head">
+            <h2>Điều khiển vòng chơi</h2>
+            <span class="hint" id="roundHint">câu 0</span>
+          </div>
+          <div class="current-q">
+            <div class="cq-top">
+              <span>Câu hiện tại</span>
+              <b id="cqPhase">Chờ</b>
+            </div>
+            <div class="cq-line">
+              <span class="cq-prompt" id="cqPrompt">—</span>
+              <span class="cq-arrow">→</span>
+              <span class="cq-answer" id="cqAnswer">—</span>
+            </div>
+          </div>
+          <div class="row-btns">
+            <button class="btn primary" id="startBtn" type="button">Bắt đầu</button>
+            <button class="btn danger" id="stopBtn" type="button">Dừng</button>
+          </div>
+          <div class="row-btns">
+            <button class="btn" id="nextBtn" type="button">Câu tiếp</button>
+            <button class="btn" id="endBtn" type="button">Kết thúc câu</button>
+          </div>
+          <div class="row-btns">
+            <button class="btn" id="revealBtn" type="button">Mở 1 chữ</button>
+            <button class="btn" id="resetBtn" type="button">Xoá điểm</button>
+          </div>
+          <div class="grid2">
+            <label class="field">
+              <span>Thời gian (giây)</span>
+              <select id="durationSelect">
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="30" selected>30</option>
+                <option value="45">45</option>
+                <option value="60">60</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Mục tiêu người chơi</span>
+              <input id="goalInput" type="number" min="1" max="100000" />
+            </label>
+          </div>
+          <label class="check">
+            <input type="checkbox" id="autoCheck" checked />
+            Tự động chuyển câu sau khi hết giờ
+          </label>
+          <label class="field">
+            <span>Tên hiển thị trên overlay</span>
+            <input id="hostInput" maxlength="40" />
+          </label>
+        </section>
+
+        <section class="card">
+          <div class="card-head">
+            <h2>Đưa lên sóng</h2>
+            <span class="hint">LIVE Studio / OBS</span>
+          </div>
+          <div class="obs-block">
+            <div class="obs-row">
+              <span>Overlay đầy đủ</span>
+              <code id="urlOpaque">/overlay/</code>
+              <button class="mini" data-copy="opaque" type="button">Copy</button>
+            </div>
+            <div class="obs-row">
+              <span>Nền trong suốt</span>
+              <code id="urlTransparent">/overlay/?transparent=1</code>
+              <button class="mini" data-copy="transparent" type="button">Copy</button>
+            </div>
+          </div>
+          <p class="note">
+            Thêm Browser Source kích thước 1080×1920 và dán URL. Chọn bản trong suốt nếu muốn
+            đặt đè lên camera.
+          </p>
+        </section>
+      </aside>
+
+      <section class="col preview-col">
+        <div class="stats">
+          <div><span>Người chơi</span><b id="statPlayers">0</b></div>
+          <div><span>Câu hỏi</span><b id="statRounds">0</b></div>
+          <div><span>Bộ từ</span><b id="statWords">0</b></div>
+          <div><span>Trạng thái</span><b id="statPhase">Chờ</b></div>
+        </div>
+        <div class="phone">
+          <div class="phone-top">
+            <i></i><i></i><span>overlay · 1080×1920</span><i></i><i></i>
+          </div>
+          <div class="phone-screen">
+            <iframe id="preview" src="/overlay/" title="Overlay preview"></iframe>
+          </div>
+        </div>
+        <p class="preview-note">Preview trực tiếp — mọi thao tác cập nhật ngay.</p>
+      </section>
+
+      <aside class="col side">
+        <section class="card words-card">
+          <div class="card-head">
+            <h2>Bộ từ vựng</h2>
+            <span class="hint" id="wordCount">0 từ</span>
+          </div>
+          <form id="wordForm" class="word-form" autocomplete="off">
+            <input id="wordPrompt" placeholder="Nghĩa tiếng Việt" maxlength="60" required />
+            <input id="wordAnswer" placeholder="Đáp án tiếng Anh" maxlength="18" required />
+            <div class="form-row">
+              <select id="wordType">
+                <option>Tính từ</option>
+                <option>Danh từ</option>
+                <option>Động từ</option>
+                <option>Cụm từ</option>
+              </select>
+              <button class="btn primary" type="submit">Thêm từ</button>
+            </div>
+          </form>
+          <div class="word-list" id="wordList"></div>
+        </section>
+
+        <section class="card log-card">
+          <div class="card-head">
+            <h2>Nhật ký</h2>
+            <button class="mini" id="clearLog" type="button">Xoá</button>
+          </div>
+          <div class="log" id="log"></div>
+        </section>
+      </aside>
+    </main>
+
+    <div class="toast-stack" id="studioToasts"></div>
+    <script src="studio.js" defer></script>
+  </body>
+</html>

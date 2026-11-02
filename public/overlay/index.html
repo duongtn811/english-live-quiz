@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>English Live — Overlay</title>
+    <link rel="stylesheet" href="overlay.css" />
+  </head>
+  <body>
+    <div class="stage" id="stage">
+      <div class="bg"></div>
+      <div class="aurora aurora-a"></div>
+      <div class="aurora aurora-b"></div>
+      <div class="dots"></div>
+
+      <main class="question">
+        <h1 class="prompt" id="prompt">Sẵn sàng?</h1>
+        <div class="ask" id="ask">Studio sẽ bắt đầu câu hỏi</div>
+
+        <div class="timer" id="timer">
+          <div class="timer-track"><div class="timer-fill" id="timerFill"></div></div>
+          <div class="timer-num" id="timerNum">0</div>
+        </div>
+
+        <div class="letters" id="letters"></div>
+      </main>
+
+      <div class="goal-spacer" aria-hidden="true"></div>
+
+      <section class="panels">
+        <div class="panel">
+          <div class="panel-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0V4Z"/><path d="M7 4H4v2a4 4 0 0 0 4 4M17 4h3v2a4 4 0 0 1-4 4"/></svg>
+            <span>Bảng Điểm</span>
+            <span class="panel-meta">TOP 10</span>
+          </div>
+          <div class="panel-list" id="leaderboard"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.5 8.9 8.9 0 0 1-4-1L3 21l2-5.5a8.4 8.4 0 0 1-1-4A8.4 8.4 0 0 1 12.5 3 8.4 8.4 0 0 1 21 11.5Z"/></svg>
+            <span>Câu trả lời</span>
+            <span class="panel-meta">+ĐIỂM</span>
+          </div>
+          <div class="panel-list" id="answers"></div>
+        </div>
+      </section>
+    </div>
+
+    <script src="overlay.js" defer></script>
+  </body>
+</html>
